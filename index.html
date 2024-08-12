@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #282c34;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.snow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(calc(100vh + 100px));
+    }
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow Animation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="snow-container" id="snowContainer"></div>
+    <script src="script.js"></script>
+    <script>
+        function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+
+    // Set random position and animation duration
+    const size = Math.random() * 10 + 5; // Size between 5px and 15px
+    snowflake.style.width = `${size}px`;
+    snowflake.style.height = `${size}px`;
+
+    const positionX = Math.random() * 100; // Position between 0% and 100%
+    snowflake.style.left = `${positionX}%`;
+
+    const duration = Math.random() * 3 + 2; // Duration between 2s and 5s
+    snowflake.style.animationDuration = `${duration}s`;
+
+    // Add snowflake to the container
+    const container = document.getElementById('snowContainer');
+    container.appendChild(snowflake);
+
+    // Remove snowflake after animation ends
+    snowflake.addEventListener('animationend', () => {
+        snowflake.remove();
+    });
+}
+
+// Create a new snowflake every 100ms
+setInterval(createSnowflake, 100);
+
+    </script>
+</body>
+</html>
